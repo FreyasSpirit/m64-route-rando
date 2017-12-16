@@ -33,6 +33,13 @@ STARS = [
   # 'BitDW', 'BitFS', 'BitS']
 ]
 
+# Map from stars to star requirements.
+# Intended to be used with string.startswith()
+# TODO: actually do this
+STAR_REQUIREMENTS = [
+
+]
+
 # Bowser levels are done as early as possible as a lazy alternative to
 # implementing star weightings.
 # Also make BOB6 the first star.
@@ -49,6 +56,8 @@ def fixed_stars(i):
     return None
 
 def meets_star_requirement(candidate, i):
+  # TODO: replace this with a map of level to star requirements.
+  # Remove the last character ([1-7]) and do exact string matching.
   if candidate.startswith('WF') and i < 1:
     return False
   if candidate.startswith('JRB') and i < 3:
@@ -126,6 +135,12 @@ def main():
 
     output.append(candidate)
     i = i + 1
+
+  print 'The logic is not complete so some stars may be unobtainable '
+  print '(ie. it doesn\'t check that vanish cap is obtained before some bbh '
+  print 'stars.  In the event that a star is unobtainable, any star may be '
+  print 'taken from that level.  If no stars from that level are obtainable, '
+  print 'any star in the game may be taken.\n\n'
 
   print '\n'.join(output)
 
